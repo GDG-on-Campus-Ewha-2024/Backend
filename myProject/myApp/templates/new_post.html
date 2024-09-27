@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>New Post</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>새 글 작성</h1>
+        <form action="{% url 'create' %}" method="POST">
+            {% csrf_token %}
+            <div>
+                <label for="title">제목</label>
+                <input type="text" name="title" id="title" required>
+            </div>
+            <div>
+                <label for="body">본문</label>
+                <textarea name="body" id="body" cols="30" rows="10" required></textarea>
+            </div>
+            <input type="submit" value="글 생성">
+        </form>
+    </div>
+</body>
+</html>
