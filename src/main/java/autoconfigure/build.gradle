@@ -1,0 +1,10 @@
+
+plugins {
+    id 'java-library' // java-library 플러그인 추가
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-autoconfigure:3.3.3' // 스프링 부트 자동 설정 의존성 - 현재 사용중인 스프링부트  버전과 맞춰야!
+}

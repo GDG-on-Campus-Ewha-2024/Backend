@@ -1,1 +1,4 @@
 rootProject.name = 'hello-spring'
+// 서브프로젝트 추가
+include ':my-auto-config-module'
+project(':my-auto-config-module').projectDir = file('src/main/java/autoconfigure')
