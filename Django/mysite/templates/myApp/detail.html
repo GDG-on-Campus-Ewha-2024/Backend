@@ -1,0 +1,22 @@
+{% include 'layouts/header.html' %}
+
+<h1>Student List</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Age</th>
+            <th>Major</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in usermodel_detail %}
+        <tr>
+            <td>{{ student.schoolId }}</td>
+            <td>{{ student.major }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% include 'layouts/footer.html' %}
