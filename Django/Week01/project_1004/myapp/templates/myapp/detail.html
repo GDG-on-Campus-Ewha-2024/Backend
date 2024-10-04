@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Detail</h2>
+<h1>제목 : {{article.title}}</h1>
+<p>내용 : {{article.content}}</p>
+<p>작성일자 : {{article.created_at}}</p>
+<p>수정일자 : {{article.updated_at}}</p>
+<a href="/myapp/{{article.pk}}/edit/">Edit</a>
+<a href="/myapp/{{article.pk}}/delete/">Delete</a>
+<br>
+<a href="/myapp/">Back</a>
+{% endblock %}

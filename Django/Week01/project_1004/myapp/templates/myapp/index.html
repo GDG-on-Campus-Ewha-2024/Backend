@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h2>게시판</h2>
+<a href='/myapp/new/'>New</a>
+
+{% for article in myapp %}
+    <h2>제목 : {{article.title}}</h2>
+    <h2>내용 : {{article.content}}</h2>
+    <a href="/myapp/{{article.pk}}">DETAIL</a>
+{% endfor %}
+
+{% endblock %}

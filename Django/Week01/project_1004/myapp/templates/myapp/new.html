@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h2>게시물 작성하기</h2>
+<form action = "/myapp/create/">
+    title: <input type="text" name="title">
+    <br>
+    content: <textarea name = "content" cols="30" rows="15"></textarea>
+    <br>
+    <input type="submit" value="Send">
+</form>
+
+{% endblock %}
