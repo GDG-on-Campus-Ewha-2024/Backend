@@ -1,15 +1,15 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, AbstractUser
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
 class UserModel(AbstractUser):
-    """일반사용자커스터마이징"""
-    class Meta:
-      db_table="my_user"
+  # 기본 유저 모델을 상속 받아 커스터마이징 한 모델
 
-    nickname = models.CharField(max_length=256, default='') 
-    birthday = models.DateField(blank=True, null=True)
-    phone_number = models.CharField(max_length=15, blank=True, verbose_name="전화번호")
+  nickname = models.CharField(max_length=256, blank=False, default='', verbose_name="닉네임") 
+  birthday = models.DateField(blank=True, null=True, verbose_name="생일")
+  phone_number = models.CharField(max_length=15, blank=True, null=True, verbose_name="전화번호")
+  profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True, verbose_name="프로필 이미지")
+  class Meta:
+    db_table="my_user"
 
 class Post(models.Model):
   """블로그 게시글 모델"""
