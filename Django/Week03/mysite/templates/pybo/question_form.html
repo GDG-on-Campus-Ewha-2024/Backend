@@ -1,0 +1,6 @@
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">저장</button>
+</form>
+<a href="{% url 'pybo:index' %}">목록으로 돌아가기</a>

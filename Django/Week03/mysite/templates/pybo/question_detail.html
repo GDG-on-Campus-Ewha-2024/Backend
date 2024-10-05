@@ -1,0 +1,6 @@
+<h1>{{ question.subject }}</h1>
+<p>{{ question.content }}</p>
+<p>작성일: {{ question.create_date }}</p>
+<a href="{% url 'pybo:question_update' question.id %}">수정</a>
+<a href="{% url 'pybo:question_delete' question.id %}">삭제</a>
+<a href="{% url 'pybo:index' %}">목록으로 돌아가기</a>

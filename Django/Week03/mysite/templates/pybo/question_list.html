@@ -1,0 +1,9 @@
+<h1>질문 목록</h1>
+<a href="{% url 'pybo:question_create' %}">질문 작성하기</a>
+<ul>
+    {% for question in question_list %}
+        <li>
+            <a href="{% url 'pybo:detail' question.id %}">{{ question.subject }}</a>
+        </li>
+    {% endfor %}
+</ul>
