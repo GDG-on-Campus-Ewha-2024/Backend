@@ -21,20 +21,48 @@ h1 {
 
 .btn{
     text-align: right;
+
 }
 
-button {
-    background-color: #007bff;
-    color: white;
+button{
     padding: 10px 15px;
-    border: none;
+    margin: 20px 0;
     border-radius: 5px;
     cursor: pointer;
-    margin: 20px 0;
 }
 
-button:hover {
+#w_btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+   
+}
+
+#w_btn:hover {
     background-color: #0056b3;
+}
+
+.e_btn{
+    background-color: white;
+    color: #007bff;
+    border: dashed;
+    border-color: #007bff;
+}
+
+.e_btn:hover {
+    border-color: #0056b3;
+    color:#0056b3;
+}
+
+.d_btn{
+    border-color: red;
+    background-color: white;
+    color:red;
+}
+
+.d_btn:hover{
+    border-color: darkred;
+    color:darkred;
 }
 
 .post {
@@ -102,3 +130,4 @@ input[type="submit"]:hover {
     margin: 0 5px;
     font-weight: bold;
 }
+

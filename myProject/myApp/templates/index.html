@@ -18,6 +18,10 @@
                 <h3>제목 : {{ post.title }}</h3>
                 <h4>작성 날짜 : {{ post.date }}</h4>
                 <p>{{ post.body }}</p>
+                <div class="btn2">
+                    <button class="e_btn" data-id="{{ post.id }}">Edit</button>
+                    <button class="d_btn" data-id="{{ post.id }}">Delete</button>
+                </div>
             </div>
         {% endfor %}
 
@@ -45,6 +49,27 @@
         $(document).ready(function(){
             $('#w_btn').click(function(){
                 location.href='{% url "new_post" %}';
+            });
+
+            $('.e_btn').click(function(){
+                var postId = $(this).data('id');  // 버튼에 설정된 데이터 아이디 가져오기
+                location.href = '{% url "edit_post" 0 %}'.replace('0', postId);  // edit_post URL로 리디렉션
+            });
+
+            $('.d_btn').click(function(){
+                var postId = $(this).data('id');  // 버튼에 설정된 데이터 아이디 가져오기
+                if (confirm('삭제하시겠습니까?')) {  // 알림창 띄우기
+                    $.ajax({
+                        url: '{% url "delete" 0 %}'.replace('0', postId),  // 삭제 URL로 요청
+                        type: 'POST',
+                        data: {
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'  // CSRF 토큰 추가
+                        },
+                        success: function() {
+                            location.reload();  // 성공 시 페이지 새로고침
+                        }
+                    });
+                }
             });
         });
     </script>
