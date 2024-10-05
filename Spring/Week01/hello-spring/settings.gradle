@@ -1,1 +1,3 @@
 rootProject.name = 'hello-spring'
+include 'autoconfigure'
+
