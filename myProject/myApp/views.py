@@ -6,6 +6,9 @@ from django.core.paginator import Paginator
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 
+def home(request):
+    return render(request, 'home_page.html')
+
 def index(request):
     posts_list = Blog.objects.all().order_by('-date')  # 모든 포스트를 가져옵니다.
     paginator = Paginator(posts_list, 5)  # 페이지당 5개의 포스트
@@ -33,11 +36,11 @@ def create(request):
         try:
             post.clean()  # 유효성 검사 호출
             post.save()    # 저장
-            return redirect('home')  # 글 목록 페이지로 리디렉션
+            return redirect('index')  # 글 목록 페이지로 리디렉션
         except ValidationError as e:
             return render(request, 'index.html', {'form': post, 'errors': e.messages})
     
-    return redirect('home', post.id)  
+    return redirect('index', post.id)  
 
 def edit_post(request, post_id):
     post = get_object_or_404(Blog, id=post_id)  # 해당 포스트 가져오기
@@ -52,7 +55,8 @@ def update(request, post_id):
         try:
             post.clean()  # 유효성 검사 호출
             post.save()  # 수정된 데이터 저장
-            return redirect('home')  # 글 목록 페이지로 리디렉션
+            return redirect('index')  # 글 목록 페이지로 리디렉션
         except ValidationError as e:
             return render(request, 'edit_post.html', {'post': post, 'errors': e.messages})
-    return redirect('home')  # POST가 아닌 경우에는 홈으로 리디렉션
+    return redirect('index')  # POST가 아닌 경우에는 홈으로 리디렉션
+

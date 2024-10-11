@@ -1,0 +1,55 @@
+{% load static %}
+{% load socialaccount %} <!-- socialaccount 태그를 로드 -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>로그인</h2>
+
+        <!-- 로그인 폼 -->
+        <form method="POST">
+            {% csrf_token %} <!-- CSRF 보호를 위한 토큰 -->
+
+            <!-- 사용자 이름 입력 필드 -->
+            <div class="form-group">
+                <label for="username">아이디:</label>
+                <input type="text" id="username" name="username" required placeholder="아이디를 입력하세요">
+            </div>
+
+            <!-- 비밀번호 입력 필드 -->
+            <div class="form-group">
+                <label for="password">비밀번호:</label>
+                <input type="password" id="password" name="password" required placeholder="비밀번호를 입력하세요">
+            </div>
+
+            <!-- 로그인 실패 시 에러 메시지 출력 -->
+            {% if error %}
+                <div class="error-message">
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+
+            <!-- 로그인 버튼 -->
+            <div class="form-group">
+                <button type="submit" class="btn">로그인</button>
+            </div>
+        </form>
+
+        <div class="sign-up-link">
+            <p>계정이 없으신가요? <a href="{% url 'signup' %}">회원가입</a></p>
+        </div>
+        
+        <!-- 카카오 로그인 링크 -->
+        <a href="{% provider_login_url 'kakao' %}">카카오 로그인</a>
+    </div>
+
+</body>
+</html>

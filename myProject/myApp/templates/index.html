@@ -44,6 +44,12 @@
         </div>
     </div>
 
+    <!-- 로그아웃 버튼 -->
+    <form action="{% url 'logout' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="logout-btn">로그아웃</button>
+    </form>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function(){

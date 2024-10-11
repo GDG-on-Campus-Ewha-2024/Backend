@@ -1,0 +1,23 @@
+<!-- main.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>블로그</title>
+    <link rel="stylesheet" href="{% static 'css/home_page.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Blog</h1>
+        </header>
+        
+        <div class="button-container">
+            <a href="{% url 'login' %}" class="btn login-btn">로그인</a>
+            <a href="{% url 'signup' %}" class="btn signup-btn">회원가입</a>
+        </div>
+    </div>
+</body>
+</html>

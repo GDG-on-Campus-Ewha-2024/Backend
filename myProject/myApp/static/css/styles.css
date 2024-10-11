@@ -131,3 +131,24 @@ input[type="submit"]:hover {
     font-weight: bold;
 }
 
+/* 화면 오른쪽 아래에 고정된 로그아웃 버튼 */
+.logout-btn {
+    position: fixed;
+    bottom: 20px;  /* 화면 아래로부터 20px 떨어지게 */
+    right: 20px;   /* 화면 오른쪽으로부터 20px 떨어지게 */
+    background-color: #f44336;  /* 빨간색 배경 */
+    color: white;  /* 텍스트 색은 흰색 */
+    padding: 10px 20px;  /* 여백 설정 */
+    border: none;  /* 테두리 없애기 */
+    border-radius: 5px;  /* 둥근 모서리 */
+    font-size: 16px;  /* 글자 크기 */
+    cursor: pointer;  /* 마우스 커서를 손 모양으로 */
+    text-decoration: none;  /* 링크 스타일 제거 */
+    transition: background-color 0.3s ease;  /* 배경 색 전환 효과 */
+}
+
+.logout-btn:hover {
+    background-color: #d32f2f;  /* 마우스를 올리면 배경 색 조금 어두운 빨간색 */
+}
+
+

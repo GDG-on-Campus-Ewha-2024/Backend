@@ -16,11 +16,11 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
 
-# Create your models here.
-class User(AbstractUser):
-    nickname = models.CharField("별명", max_length=20, null=True, blank=True)
-    phone_num = models.CharField("전화번호", max_length=20, null=True, blank=True)
+# # Create your models here.
+# class User(AbstractUser):
+#     nickname = models.CharField("별명", max_length=20, null=True, blank=True)
+#     phone_num = models.CharField("전화번호", max_length=20, null=True, blank=True)
 
 
-    class Meta:
-        db_table = "user"
+#     class Meta:
+#         db_table = "user"

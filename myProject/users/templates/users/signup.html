@@ -1,0 +1,35 @@
+<!-- accounts/templates/signup.html -->
+{% load bootstrap4 %}
+{% block content %}
+<div class="wrapper" style="text-align: center;">
+    <h1>회원가입</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% load socialaccount %}
+
+        <a href="{% provider_login_url 'kakao' method='oauth2' %}">
+        카카오톡 회원가입
+        </a><br>
+
+        {% csrf_token %}
+        아이디: <br>
+        <input name="username" type="text"><br><br>
+    
+        닉네임: <br>
+        <input name="nickname" type="text"><br><br>
+    
+        이메일: <br>
+        <input name="email" type="email"><br><br>
+    
+        비밀번호: <br>
+        <input name="password1" type="password"><br><br>
+    
+        비밀번호 확인: <br>
+        <input name="password2" type="password"><br><br>
+    
+        프로필 사진: <br>
+        <input type="file" name="image"><br><br>
+    
+        <input type="submit" value="Sign Up">
+    </form>
+</div>
+{% endblock %}
