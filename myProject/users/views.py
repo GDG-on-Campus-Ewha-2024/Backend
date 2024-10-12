@@ -46,7 +46,7 @@ def signup(request):
             return HttpResponse(f"Error: {str(e)}", status=500)
 
     elif request.method == 'GET':
-        return render(request, 'users/signup.html')
+        return render(request, 'signup.html')
     else:
         return HttpResponse('Invalid request method', status=405)
     
@@ -71,3 +71,4 @@ def logout(request):
             return HttpResponse('User not authenticated', status=401)
     else:
         return HttpResponse('Method not allowed', status=405)
+

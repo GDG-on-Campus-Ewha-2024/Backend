@@ -57,7 +57,8 @@ LOGIN_REDIRECT_URL = '/posts/'
 # 로그아웃 후 리디렉션할 페이지
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
-# 로그아웃 버튼 클릭 시 자동 로그아웃
+SOCIALACCOUNT_LOGIN_ON_GET=True
+ACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_LOGOUT_ON_GET = True
 
 MIDDLEWARE = [

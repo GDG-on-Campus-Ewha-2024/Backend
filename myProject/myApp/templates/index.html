@@ -12,7 +12,7 @@
         <div class="btn">
           <button id="w_btn">Write</button>
         </div>
-
+    
         {% for post in posts %}
             <div class="post">
                 <h3>제목 : {{ post.title }}</h3>
@@ -24,31 +24,42 @@
                 </div>
             </div>
         {% endfor %}
-
-        <div class="pagination">
-            <span class="step-links">
-                {% if posts.has_previous %}
-                    <a href="?page=1">&laquo; 처음</a>
-                    <a href="?page={{ posts.previous_page_number }}">이전</a>
-                {% endif %}
-
-                <span class="current">
-                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+    
+        <div class="pagination-container">
+            
+            <div class="pagination">
+                <span class="step-links">
+                    {% if posts.has_previous %}
+                        <a href="?page=1" class="active-link">&laquo; 처음</a>
+                        <a href="?page={{ posts.previous_page_number }}" class="active-link">이전</a>
+                    {% else %}
+                        <span class="disabled">&laquo; 처음</span>
+                        <span class="disabled">이전</span>
+                    {% endif %}
+        
+                    <span class="current">
+                        Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                    </span>
+        
+                    {% if posts.has_next %}
+                        <a href="?page={{ posts.next_page_number }}" class="active-link">다음</a>
+                        <a href="?page={{ posts.paginator.num_pages }}" class="active-link">마지막 &raquo;</a>
+                    {% else %}
+                        <span class="disabled"> 다음 </span>
+                        <span class="disabled"> 마지막 &raquo;</span>
+                    {% endif %}
                 </span>
-
-                {% if posts.has_next %}
-                    <a href="?page={{ posts.next_page_number }}">다음</a>
-                    <a href="?page={{ posts.paginator.num_pages }}">마지막 &raquo;</a>
-                {% endif %}
-            </span>
+            </div>
+    
+            <!-- 로그아웃 버튼 -->
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">로그아웃</button>
+            </form>
         </div>
     </div>
 
-    <!-- 로그아웃 버튼 -->
-    <form action="{% url 'logout' %}" method="POST">
-        {% csrf_token %}
-        <button type="submit" class="logout-btn">로그아웃</button>
-    </form>
+    
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
