@@ -20,6 +20,7 @@ from myApp.views import login_view  # login_view를 임포트합니다.
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/login', include('allauth.urls')),
     path('', login_view, name='home'),  # 기본 페이지를 login_view로 설정
     path('login/', login_view, name='login'),  # /login 경로도 유지
 ]
