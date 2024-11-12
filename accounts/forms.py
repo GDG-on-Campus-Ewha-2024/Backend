@@ -19,3 +19,7 @@ class CustomUserCreationForm(forms.ModelForm):
             self.add_error('password_confirm', "Passwords do not match")
              
         return cleaned_data
+    
+class CustomUserLoginForm(forms.Form):
+    username = forms.CharField(max_length=150, label='Username')
+    password = forms.CharField(widget=forms.PasswordInput, label='Password')
