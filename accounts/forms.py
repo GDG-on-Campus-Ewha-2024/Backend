@@ -1,7 +1,7 @@
 from django import forms 
 from .models import CustomUser
 
-class CustomUserCreationForm(forms.ModelForm):
+class CustomUserSignupForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, label='Password')
     password_confirm = forms.CharField(widget=forms.PasswordInput, label='Confirm Password')
 

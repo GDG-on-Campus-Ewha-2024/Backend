@@ -2,12 +2,12 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login as auth_login 
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm
+from .forms import CustomUserSignupForm
 from .forms import CustomUserLoginForm
 
 def signup(request): 
     if request.method == 'POST': 
-        form = CustomUserCreationForm(request.POST, request.FILES)
+        form = CustomUserSignupForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])  # 비밀번호를 해싱하여 저장
@@ -16,7 +16,7 @@ def signup(request):
         else: 
             print(form.errors)
     else:
-        form = CustomUserCreationForm()
+        form = CustomUserSignupForm()
     
     return render(request, 'accounts/signup.html', {'form': form})
 
