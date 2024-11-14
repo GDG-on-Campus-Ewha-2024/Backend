@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login as auth_login 
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
 from .forms import CustomUserLoginForm
 
@@ -31,7 +33,7 @@ def login(request):
             if user is not None: 
                 # 인증된 사용자를 로그인 처리 
                 auth_login(request, user)
-                return redirect('/home/') # 로그인 후 이동할 페이지
+                return redirect('home') # 로그인 후 이동할 페이지
             else: 
                 form.add_error(None, "Invalid username or password")
         else:
@@ -41,3 +43,8 @@ def login(request):
     
     return render(request, 'accounts/login.html', {'form': form})
 
+
+@login_required(login_url='/login/')
+def logout_view(request):
+    logout(request)
+    return redirect('/login/')
