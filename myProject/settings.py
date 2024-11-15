@@ -61,11 +61,46 @@ MIDDLEWARE = [
 ]
 
 SITE_ID=1
-LOGIN_URL='custom_login'
+LOGIN_URL='/accounts/login/'
 LOGIN_REDIRECT_URL='/'
 ACCOUNT_LOGOUT_REDIRECT_URL='/'
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 
 ROOT_URLCONF = 'myProject.urls'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'naver': {
+        'SCOPE': [
+            'email',
+            'profile',
+        ],
+        'AUTH_PARAMS': {'access_type': 'offline'},
+    }
+}
+
+
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        'allauth': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
+
 
 TEMPLATES = [
     {
@@ -91,7 +126,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 WSGI_APPLICATION = 'myProject.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -138,7 +172,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
