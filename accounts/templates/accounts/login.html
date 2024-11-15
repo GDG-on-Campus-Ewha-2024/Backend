@@ -1,7 +1,6 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
 
-{%block content%}
-
+{% block content %}
 <h2>Login</h2>
 <form method="POST">
     {% csrf_token %}
@@ -21,4 +20,9 @@
     
     <button type="submit">Login</button>
 </form>
+
+<!-- 소셜 로그인 버튼 추가 -->
+<h3>Or login with:</h3>
+<a href="{% url 'naver_login' %}">Login with Naver</a> <!-- 네이버 소셜 로그인 URL -->
+
 {% endblock %}

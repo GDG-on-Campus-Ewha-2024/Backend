@@ -12,7 +12,7 @@ def signup(request):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])  # 비밀번호를 해싱하여 저장
             user.save()
-            return redirect('/login/')
+            return redirect('custom_login')
         else: 
             print(form.errors)
     else:
@@ -44,7 +44,7 @@ def login(request):
     return render(request, 'accounts/login.html', {'form': form})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='custom_login')
 def logout_view(request):
     logout(request)
-    return redirect('/accounts/login/')
+    return redirect('custom_login')
