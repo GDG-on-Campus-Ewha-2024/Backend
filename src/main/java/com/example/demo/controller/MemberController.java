@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -20,38 +21,53 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    // GET /api/members
     @GetMapping
-    public List<EntityModel<Member>> getAllMembers() {
-        return memberService.getAllMembers().stream()
+    public CollectionModel<EntityModel<Member>> getAllMembers() {
+        List<EntityModel<Member>> members = memberService.getAllMembers().stream()
                 .map(member -> EntityModel.of(member,
                         WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MemberController.class)
-                                .getMemberById(member.getId())).withSelfRel()))
+                                .getMemberById(member.getId())).withSelfRel(),
+                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MemberController.class)
+                                .getAllMembers()).withRel("all-members")))
                 .collect(Collectors.toList());
+        return CollectionModel.of(members,
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MemberController.class).getAllMembers()).withSelfRel());
     }
 
+    // GET /api/members/{id}
     @GetMapping("/{id}")
     public EntityModel<Member> getMemberById(@PathVariable("id") Long id) {
         Member member = memberService.getMemberById(id);
         return EntityModel.of(member,
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MemberController.class).getMemberById(id)).withSelfRel(),
                 WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MemberController.class).getAllMembers()).withRel("all-members"));
     }
 
+    // POST /api/members
     @PostMapping
-    public ResponseEntity<Member> createMember(@RequestBody Member member) {
+    public ResponseEntity<EntityModel<Member>> createMember(@RequestBody Member member) {
         Member createdMember = memberService.createMember(member);
-        return ResponseEntity.created(
-                        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MemberController.class).getMemberById(createdMember.getId())).toUri())
-                .body(createdMember);
+        EntityModel<Member> model = EntityModel.of(createdMember,
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MemberController.class).getMemberById(createdMember.getId())).withSelfRel(),
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MemberController.class).getAllMembers()).withRel("all-members"));
+        return ResponseEntity.created(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MemberController.class)
+                .getMemberById(createdMember.getId())).toUri()).body(model);
     }
 
+    // PUT /api/members/{id}
     @PutMapping("/{id}")
-    public ResponseEntity<Member> updateMember(@PathVariable Long id, @RequestBody Member member) {
+    public ResponseEntity<EntityModel<Member>> updateMember(@PathVariable("id") Long id, @RequestBody Member member) {
         Member updatedMember = memberService.updateMember(id, member);
-        return ResponseEntity.ok(updatedMember);
+        EntityModel<Member> model = EntityModel.of(updatedMember,
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MemberController.class).getMemberById(id)).withSelfRel(),
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MemberController.class).getAllMembers()).withRel("all-members"));
+        return ResponseEntity.ok(model);
     }
 
+    // DELETE /api/members/{id}
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMember(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteMember(@PathVariable("id") Long id) {
         memberService.deleteMember(id);
         return ResponseEntity.noContent().build();
     }
