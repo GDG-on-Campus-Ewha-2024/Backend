@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Blog - Post Detail</title>
-</head>
-<body>
-    <h1>게시글 상세 페이지</h1>
-    <p>게시글 ID: {{ post_id }}</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}게시글 상세보기{% endblock %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
+
+<a href="{% url 'post_edit' post_id=post.id %}" class="btn btn-warning">수정</a>
+<form action="{% url 'post_delete' post_id=post.id %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">삭제</button>
+</form>
+<a href="{% url 'post_list' %}" class="btn btn-secondary mt-4">목록으로</a>
+{% endblock %}

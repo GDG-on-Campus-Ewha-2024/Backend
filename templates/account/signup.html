@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+
+{% block title %}회원가입 - Erika{% endblock %}
+
+{% block content %}
+<div class="card mx-auto" style="max-width: 400px;">
+    <h2 class="text-center">회원가입</h2>
+    <form method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-block">회원가입</button>
+    </form>
+    <div class="text-center mt-3">
+        <a href="{% url 'account_login' %}">이미 계정이 있으신가요? 로그인</a>
+    </div>
+
+    <!-- 네이버 로그인 버튼 -->
+    <hr>
+    <div class="text-center mt-3">
+        <p>또는 소셜 계정으로 가입하세요:</p>
+        <a href="{% provider_login_url 'naver' %}" class="btn btn-success btn-block">네이버로 회원가입</a>
+    </div>
+</div>
+{% endblock %}

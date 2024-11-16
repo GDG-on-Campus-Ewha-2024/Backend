@@ -1,12 +1,13 @@
-<h1>
-    {% if form.instance.id %}
-        {{ form.instance.title }}
-    {% else %}
-        새 게시글 작성
-    {% endif %}
-</h1>
+{% extends 'base.html' %}
+
+{% block title %}{{ form.instance.id|yesno:"게시글 수정,새 게시글 작성" }}{% endblock %}
+
+{% block content %}
+<h1>{{ form.instance.id|yesno:"게시글 수정,새 게시글 작성" }}</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">저장</button>
+    <button type="submit" class="btn btn-primary">저장</button>
 </form>
+<a href="{% url 'post_list' %}" class="btn btn-secondary mt-4">목록으로</a>
+{% endblock %}

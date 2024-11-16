@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Blog - Posts</title>
-</head>
-<body>
-    <h1>게시글 목록</h1>
-    <ul>
-        <li><a href="{% url 'post_detail' post_id=1 %}">게시글 1</a></li>
-        <li><a href="{% url 'post_detail' post_id=2 %}">게시글 2</a></li>
-    </ul>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}게시글 목록{% endblock %}
+
+{% block content %}
+<h1>게시글 목록</h1>
+<ul>
+    {% for post in posts %}
+        <li><a href="{% url 'post_detail' post_id=post.id %}">{{ post.title }}</a></li>
+    {% empty %}
+        <p>등록된 게시글이 없습니다.</p>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'post_create' %}" class="btn btn-primary mt-4">새 게시글 작성</a>
+{% endblock %}
