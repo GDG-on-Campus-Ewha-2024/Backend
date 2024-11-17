@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -26,10 +25,9 @@ SECRET_KEY = 'django-insecure-g&_r1i-#2^0irq^_!x5tjq@9k=4-fho3=q%o$db!d$x@q*-329
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+API_KEY='FF95Tr6zKFiha4L6zUh%2Btgv%2Bd9RMAeOT0q98iHcpZKIgQoCBj8FxbHc6Ku1WlxEWvio0XAdxtii8N1RVpdY0Sw%3D%3D'
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,15 +36,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.naver',
 
     'blog',
     'core',
+    'course',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,28 +51,10 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware', 
 ]
 
-SITE_ID=1
-LOGIN_URL='/accounts/login/'
-LOGIN_REDIRECT_URL='/'
-ACCOUNT_LOGOUT_REDIRECT_URL='/'
-ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
-
 ROOT_URLCONF = 'myProject.urls'
-
-SOCIALACCOUNT_PROVIDERS = {
-    'naver': {
-        'SCOPE': [
-            'email',
-            'profile',
-        ],
-        'AUTH_PARAMS': {'access_type': 'offline'},
-    }
-}
-
 
 TEMPLATES = [
     {
@@ -92,13 +70,6 @@ TEMPLATES = [
             ],
         },
     },
-]
-
-AUTHENTICATION_BACKENDS = [
-    # 'username'으로 로그인하기 위한 기본 백엔드 
-    'django.contrib.auth.backends.ModelBackend',
-    # 'allauth'방법으로 로그인하기 위한 백엔드 
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'myProject.wsgi.application'
@@ -149,7 +120,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 

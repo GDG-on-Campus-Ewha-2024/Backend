@@ -2,5 +2,6 @@
 {% block title %}Website-Erika{% endblock %}
 
 {% block content %}
-<h2>관광 코스 관리 웹 서비스 + 블로그</h2>
+<a href="{% url 'post_list' %}" class="btn btn-primary">blog</a>
+<a href="{% url 'course' %}" class="btn btn-primary">course</a>
 {% endblock %}
