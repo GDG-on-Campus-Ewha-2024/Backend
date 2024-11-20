@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Template Example</title>
+</head>
+
+<body>
+    <h1>Django Template Language Example</h1>
+
+    <!-- 템플릿 변수 출력 -->
+    <p>Hello, {{ user_name }}!</p>
+
+    <!-- 필터 사용: 변수에 적용된 필터 (lower, date) -->
+    <p>Your name in lowercase: {{ user_name | lower }}</p>
+    <p>Today's date: {{ today | date:"Y-m-d" }}</p>
+
+    <!-- 반복문 -->
+    <h2>Your Items:</h2>
+    <ul>
+        {% for item in items %}
+        <li>{{ item }}</li>
+        {% empty %}
+        <li>No items available.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- 주석: 이 코드는 HTML에 표시되지 않습니다 -->
+    #{ This is a comment in Django template language #}
+
+    <!-- URL 태그 사용 -->
+    <a href="{% url 'index' %}">Go to Home</a>
+
+    <!-- 상속 예시 -->
+    {% block content %}
+    <p>This is content that can be overridden by child templates.</p>
+    {% endblock %}
+
+    <!-- Include 사용 -->
+    {% include 'footer.html' %}
+</body>
+
+</html>
