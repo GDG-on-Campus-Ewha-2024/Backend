@@ -50,9 +50,13 @@
 
         {% load socialaccount %}
 
-        <div class="kakao_login text-center">
+        <div class="social_signup">
             <a href="{% provider_login_url 'kakao' method='oauth2' %}">
                 <img src="https://cdn.imweb.me/upload/S20210304872ba49a108a8/89a68d1e3674a.png" alt="카카오 회원가입" class="kakao_img">
+            </a>
+
+            <a href="{% provider_login_url 'naver'  %}">
+                <img src="https://clova-phinf.pstatic.net/MjAxODAzMjlfOTIg/MDAxNTIyMjg3MzM3OTAy.WkiZikYhauL1hnpLWmCUBJvKjr6xnkmzP99rZPFXVwgg.mNH66A47eL0Mf8G34mPlwBFKP0nZBf2ZJn5D4Rvs8Vwg.PNG/image.png" alt="네이버 회원가입" class="naver_img">
             </a>
         </div>
 

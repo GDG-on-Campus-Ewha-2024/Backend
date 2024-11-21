@@ -1,7 +1,7 @@
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from users.models import UserProfile  # UserProfile 임포트
+from users.models import User  # UserProfile 임포트
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 
@@ -32,7 +32,7 @@ def signup(request):
             )
 
             # UserProfile 모델을 사용하여 추가 정보 저장
-            user_profile = UserProfile.objects.create(
+            user_profile = User.objects.create(
                 user=user,
                 nickname=nickname,
                 image=image,
@@ -48,19 +48,25 @@ def signup(request):
     elif request.method == 'GET':
         return render(request, 'signup.html')
     else:
-        return HttpResponse('Invalid request method', status=405)
+        return HttpResponse('Invalid request method',)
     
 def login_view(request):
     if request.method == 'POST':
-        username=request.POST['username']
-        password=request.POST['password']
-        user=authenticate(request, username=username, password=password)
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        
         if user is not None:
             login(request, user)
-            return redirect('index')
+            
+            return redirect('trip:search')  # 로그인 후 'search' 페이지로 리디렉션
+            
+            
         else:
-            return render(request, 'login.html', {'error': '유효하지 않은 사용자 이름 또는 비밀번호입니다,'})
+
+            return HttpResponse('회원가입이 필요합니다.',status=400)
     return render(request, 'login.html')
+
 
 def logout(request):
     if request.method == 'POST':  # POST 요청만 처리

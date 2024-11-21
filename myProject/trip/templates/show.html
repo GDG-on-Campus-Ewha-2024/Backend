@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}관광 코스 목록{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="page-title">관광 코스 목록</h2>
+
+    <div class="btns">
+        <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">로그아웃</button>
+        </form>
+
+        <!-- 코스 저장 버튼 -->
+        <form action="{% url 'trip:bookmark_trip' %}" method="POST">
+            {% csrf_token %}
+            
+            <!-- 선택된 관광지의 ID들을 trip_ids 배열로 전달 -->
+            <input type="hidden" name="trip_ids" value="{% for trip in trips %}{{ trip.id }}{% if not forloop.last %},{% endif %}{% endfor %}">
+            
+            <button type="submit">코스 저장</button>
+        </form>
+        
+    </div>
+
+    {% if trips %}
+        <div class="trip-list">
+            {% for trip in trips %}
+                <div class="trip-item">
+                    <div class="trip-image">
+                        {% if trip.img %}
+                            <img src="{{ trip.img }}" alt="Image">
+                        {% else %}
+                            <div class="no-image">이미지 없음</div>
+                        {% endif %}
+                    </div>
+                    <div class="trip-details">
+                        <h3 class="trip-title">{{ trip.title }}</h3>
+                        <p class="trip-address">
+                            <strong>주소:</strong> {{ trip.addr1 }}<br>
+                            <strong>상세 주소:</strong> {{ trip.addr2 }}<br>
+                            <strong>우편번호:</strong> {{ trip.zipcode }}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="no-data">검색된 관광지가 없습니다.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -75,10 +75,6 @@ h1, h2 {
     text-decoration: underline;
 }
 
-.kakao_img {
-    display: block;
-    margin: auto;
-}
 
 .hr-sect {
     display: flex;
@@ -124,7 +120,23 @@ h1, h2 {
     font-size: 16px;
 }
 
-/* 카카오 로그인 이미지 */
-.kakao_login img {
-    width: 60px;
+.social_login{
+    display: flex;
+    justify-content: center;
 }
+
+.social_login img{
+    padding: 0 10px;
+}
+/* 카카오 로그인 이미지 */
+.kakao_img {
+    width: 60px;
+    display: inline-block;
+}
+
+.naver_img{
+    width : 60px;
+    display: inline-block;
+}
+
+

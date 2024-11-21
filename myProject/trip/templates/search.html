@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}관광 코스 검색{% endblock %}
+
+{% block content %}
+<head>
+    <script src="https://kit.fontawesome.com/75f6aca73d.js" crossorigin="anonymous"></script>
+</head>
+<div class="container">
+    <h2 class="page-title">관광 코스 검색</h2>
+    
+    <form class="search-box" action="{% url 'trip:search' %}" method="get">
+        <input class="search-txt" type="text" name="areaCode" placeholder="지역코드를 입력하세요." required>
+        <input class="search-txt" type="text" name="sigunguCode" placeholder="시군구코드를 입력하세요." required>
+        <button class="search-btn" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </form>
+</div>
+{% endblock %}

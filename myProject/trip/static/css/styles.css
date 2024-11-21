@@ -1,0 +1,114 @@
+/* 전체 페이지 레이아웃 */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 페이지 제목 */
+.page-title {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* 데이터가 없는 경우의 메시지 */
+.no-data {
+    font-size: 1.2em;
+    color: #777;
+}
+
+.btns{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btns button{
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 15px;
+
+}
+
+/* 관광 코스 목록 */
+.trip-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/* 각 관광 코스 항목 스타일 */
+.trip-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 마우스를 올리면 카드 효과 */
+.trip-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 이미지 처리 */
+.trip-image {
+    max-height: 200px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.trip-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* 이미지가 없을 경우 */
+.no-image {
+    background-color: #eee;
+    text-align: center;
+    padding: 50px 0;
+    font-size: 1.2em;
+    color: #777;
+}
+
+/* 상세 정보 스타일 */
+.trip-details {
+    font-size: 1em;
+    color: #333;
+}
+
+.trip-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.trip-address {
+    font-size: 1.1em;
+    color: #555;
+}
+
+.trip-address strong {
+    font-weight: bold;
+}
+
+.search-box{
+
+}
+
+.search-txt{
+    display: inline-flex;
+    width: 50%;
+}
+
+.search-btn{
+
+}
