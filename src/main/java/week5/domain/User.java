@@ -18,7 +18,15 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    // Getters and Setters
+    public User() {}
+
+    public User(Long id, String email, String username, String password) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
