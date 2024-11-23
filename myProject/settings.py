@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'core',
     'account',
     'course',
+
+    'rest_framework',
 ]
 
 SITE_ID = 1
