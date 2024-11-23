@@ -1,26 +1,14 @@
 package com.example.demo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import org.springframework.hateoas.RepresentationModel;
-
-@Entity
-public class Member extends RepresentationModel<Member> {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Member{
     private Long id;
-
     private String username;
-    private String email;
 
     // Constructor
     public Member() {}
 
-    public Member(String username, String email) {
+    public Member(String username) {
         this.username = username;
-        this.email = email;
     }
 
     // Getters and Setters
@@ -38,13 +26,5 @@ public class Member extends RepresentationModel<Member> {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }

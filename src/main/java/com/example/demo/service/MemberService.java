@@ -2,10 +2,12 @@ package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
 import com.example.demo.domain.Member;
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.MemberRepository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemberService {
@@ -20,31 +22,28 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Member getMemberById(Long id) {
-        return memberRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Member not found with ID: " + id));
+    public Optional<Member> getMemberById(Long id) {
+        return memberRepository.findById(id);
     }
 
-    public Member getMemberByEmail(String email) {
-        return memberRepository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("Member not found with email: " + email));
-    }
-
-    public Member createMember(Member member) {
-        return memberRepository.save(member);
-    }
-
-    public Member updateMember(Long id, Member updatedMember) {
-        Member existingMember = getMemberById(id);
-        existingMember.setUsername(updatedMember.getUsername());
-        existingMember.setEmail(updatedMember.getEmail());
-        return memberRepository.save(existingMember);
-    }
-
-    public void deleteMember(Long id) {
-        if (!memberRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Member not found with ID: " + id);
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public Member join(Member member) {
+        if ("error".equals(member.getUsername())) {
+            throw new IllegalArgumentException("username == error");
         }
+        memberRepository.save(member);
+        return member;
+    }
+
+    public Optional<Member> update(Long id, Member updatedMember) {
+        Optional<Member> memberOptional = getMemberById(id);
+        memberOptional.ifPresent(member -> member.setUsername(updatedMember.getUsername()));
+        return memberOptional;
+    }
+
+
+    public void deleteById(Long id) {
+        getMemberById(id); // id 존재 여부 확인하면서 예외 처리
         memberRepository.deleteById(id);
     }
 }
