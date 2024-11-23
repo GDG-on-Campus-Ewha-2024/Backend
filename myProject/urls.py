@@ -16,11 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from myApp.views import login_view  # login_view를 임포트합니다.
+from myApp.views import LoginView,SignUpView  # login_view를 임포트합니다.
+from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/login', include('allauth.urls')),
-    path('', login_view, name='home'),  # 기본 페이지를 login_view로 설정
-    path('login/', login_view, name='login'),  # /login 경로도 유지
+    # path('', LoginView, name='home'),  # 기본 페이지를 login_view로 설정
+    path('login/', LoginView, name='login'),  # /login 경로도 유지
+    path('trip/', include('trip.urls')),
 ]
