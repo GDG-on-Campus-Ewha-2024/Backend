@@ -1,10 +1,15 @@
 import requests
 import xmltodict
-from django.shortcuts import render
-from django.conf import settings 
+import os 
+from django.http import JsonResponse
 from .models import TouristSpot
+from dotenv import load_dotenv
 
-API_KEY = settings.API_KEY
+# .env 파일 로드 
+load_dotenv() 
+
+# 환경 변수 사용 
+API_KEY=os.getenv("API_KEY")
 
 def view_course(request):
     url = f'http://apis.data.go.kr/B551011/KorService1/locationBasedList1?MobileOS=ETC&MobileApp=MyProject&mapX=126.981611&mapY=37.568477&radius=1000&serviceKey={API_KEY}'
@@ -21,7 +26,7 @@ def view_course(request):
             addr1=item.get('addr1', '주소 정보 없음')
 
             # 데이터베이스에 항목 저장 (중복 방지)
-            tourist_spot, created = TouristSpot.objects.get_or_create(
+            TouristSpot.objects.get_or_create(
                 title=title,
                 defaults={'addr1': addr1}
             )
@@ -34,4 +39,4 @@ def view_course(request):
     else:
         selected_items=[]
 
-    return render(request, 'course/course.html', {'selected_items':selected_items})
+    return JsonResponse({'selected_items': selected_items}, safe=False)

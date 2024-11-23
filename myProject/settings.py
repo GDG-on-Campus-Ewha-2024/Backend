@@ -25,7 +25,6 @@ SECRET_KEY = 'django-insecure-g&_r1i-#2^0irq^_!x5tjq@9k=4-fho3=q%o$db!d$x@q*-329
 DEBUG = True
 
 ALLOWED_HOSTS = []
-API_KEY='FF95Tr6zKFiha4L6zUh%2Btgv%2Bd9RMAeOT0q98iHcpZKIgQoCBj8FxbHc6Ku1WlxEWvio0XAdxtii8N1RVpdY0Sw%3D%3D'
 
 # Application definition
 INSTALLED_APPS = [
@@ -39,6 +38,7 @@ INSTALLED_APPS = [
 
     'blog',
     'core',
+    'account',
     'course',
 ]
 
@@ -56,10 +56,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'myProject.urls'
 
+AUTH_USER_MODEL = 'account.CustomUser'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
