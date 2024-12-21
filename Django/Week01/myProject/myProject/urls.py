@@ -18,8 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from user import views
 
 urlpatterns = [
+    path("", views.SignInView.as_view()),
     path("admin/", admin.site.urls),
     path('myapp/', include("myApp.urls")),  
     path('accounts/', include("allauth.urls")), # <- 추가
